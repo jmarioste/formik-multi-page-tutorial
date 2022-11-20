@@ -7,11 +7,11 @@ const PostSeoMetadataTab = () => {
         <label className='label text-accent'>
           <span>Page Title</span>
         </label>
-        <Field name="title" type="text" className="input input-bordered" placeholder="title" />
+        <Field name="seo.title" type="text" className="input input-bordered" placeholder="title" />
         <label className='label text-accent'>
           <span>Meta Description</span>
         </label>
-        <Field name="slug" type="text" className="input input-bordered" placeholder="slug" />
+        <Field name="seo.description" type="text" className="input input-bordered" placeholder="description" />
       </div>
     </div>
   )
