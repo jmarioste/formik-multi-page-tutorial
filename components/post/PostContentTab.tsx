@@ -1,6 +1,5 @@
 import { Field } from 'formik'
 import React from 'react'
-
 const PostContentTab = () => {
   return (
     <div>
@@ -13,5 +12,4 @@ const PostContentTab = () => {
     </div>
   )
 }
-
 export default PostContentTab

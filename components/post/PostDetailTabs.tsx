@@ -1,11 +1,7 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import PostInfoTab from './PostInfoTab';
-import PostSeoMetadataTab from './PostSeoMetadataTab';
-import PostContentTab from './PostContentTab';
-import SaveButton from './SaveButton';
 
 const PostDetailTabs = () => {
 
@@ -13,46 +9,27 @@ const PostDetailTabs = () => {
   const params = Array.isArray(router.query.slug)
     ? (router.query.slug as string[])
     : [];
-  const [slug, tab] = params;
+  const [slug, currentTab = ""] = params;
 
-  const currentTab = useMemo(() => {
-    switch (tab) {
-      case "content": return <PostContentTab />;
-      case "seo": return <PostSeoMetadataTab />;
-      default:
-        return <PostInfoTab />
-    }
-  }, [tab])
+  const tabInfo = [
+    { url: `/cms/post/${slug}`, text: "PostInfo", activeMatcher: "" },
+    { url: `/cms/post/${slug}/content`, text: "Content", activeMatcher: "content" },
+    { url: `/cms/post/${slug}/seo`, text: "SEO Metadata", activeMatcher: "seo" }
+  ]
   return (
     <div>
       <div className="tabs">
-        <Link href={`/cms/post/${slug}`}>
-          <a className={classNames({
-            "tab tab-bordered": true,
-            "tab-active": !tab,
-          })}>Post Info</a>
-        </Link>
-        <Link href={`/cms/post/${slug}/content`}>
-          <a className={classNames({
-            "tab tab-bordered": true,
-            "tab-active": tab === "content",
-          })}>
-            Content
-          </a>
-        </Link>
-        <Link href={`/cms/post/${slug}/seo`}>
-          <a className={classNames({
-            "tab tab-bordered": true,
-            "tab-active": tab === "seo",
-          })}>
-            SEO Metadata
-          </a>
-        </Link>
+        {
+          tabInfo.map((tab, index) => {
+            return <Link href={tab.url} key={index}>
+              <a className={classNames({
+                "tab tab-bordered": true,
+                "tab-active": tab.activeMatcher === currentTab,
+              })}>{tab.text}</a>
+            </Link>
+          })
+        }
       </div>
-      <div className="my-2">
-        {currentTab}
-      </div>
-      <SaveButton />
     </div>
   )
 }

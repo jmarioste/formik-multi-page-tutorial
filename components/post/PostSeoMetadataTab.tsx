@@ -1,6 +1,5 @@
 import { Field } from 'formik'
 import React from 'react'
-
 const PostSeoMetadataTab = () => {
   return (
     <div>
@@ -17,5 +16,4 @@ const PostSeoMetadataTab = () => {
     </div>
   )
 }
-
 export default PostSeoMetadataTab
